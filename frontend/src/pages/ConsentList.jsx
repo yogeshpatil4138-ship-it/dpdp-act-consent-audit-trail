@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import api from "../services/api"
 
 function ConsentList() {
   const [records, setRecords] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const navigate = useNavigate()
 
   // fetch all consent records when page loads
   useEffect(() => {
@@ -63,6 +65,7 @@ function ConsentList() {
               <th className="px-4 py-3">Purpose</th>
               <th className="px-4 py-3">Status</th>
               <th className="px-4 py-3">Created At</th>
+              <th className="px-4 py-3">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -87,6 +90,11 @@ function ConsentList() {
                 </td>
                 <td className="px-4 py-3">
                   {new Date(record.createdAt).toLocaleDateString()}
+                </td>
+                <td className="px-4 py-3">
+                  <button
+                    onClick={() => navigate(`/edit/${record.id}`)}
+                    className="text-blue-600 hover:underline text-xs font-medium">Edit</button>
                 </td>
               </tr>
             ))}
