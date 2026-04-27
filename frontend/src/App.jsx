@@ -4,6 +4,8 @@ import { AuthProvider, useAuth } from "./context/AuthContext"
 import ProtectedRoute from "./components/ProtectedRoute"
 import ConsentList from "./pages/ConsentList"
 import ConsentForm from "./pages/ConsentForm"
+import ConsentDetail from "./pages/ConsentDetail"
+import Dashboard from "./pages/Dashboard"
 import Login from "./pages/Login"
 
 function Navbar() {
@@ -24,6 +26,14 @@ function Navbar() {
         DPDP Act — Consent Audit Trail
       </h1>
       <div className="flex items-center gap-4">
+        {user && (
+          <button
+            onClick={() => navigate("/dashboard")}
+            className="text-sm text-gray-600 hover:text-blue-700 font-medium"
+          >
+            Dashboard
+          </button>
+        )}
         {user && (
           <span className="text-sm text-gray-500">
             Welcome, {user.username}
@@ -68,6 +78,14 @@ function App() {
                 }
               />
               <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
                 path="/create"
                 element={
                   <ProtectedRoute>
@@ -80,6 +98,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <ConsentForm />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/detail/:id"
+                element={
+                  <ProtectedRoute>
+                    <ConsentDetail />
                   </ProtectedRoute>
                 }
               />

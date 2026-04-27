@@ -99,7 +99,13 @@ function ConsentList() {
                 <td className="px-4 py-3">
                   {new Date(record.createdAt).toLocaleDateString()}
                 </td>
-                <td className="px-4 py-3">
+                <td className="px-4 py-3 flex gap-3">
+                  <button
+                    onClick={() => navigate(`/detail/${record.id}`)}
+                    className="text-gray-600 hover:underline text-xs font-medium"
+                  >
+                    View
+                  </button>
                   <button
                     onClick={() => navigate(`/edit/${record.id}`)}
                     className="text-blue-600 hover:underline text-xs font-medium"
